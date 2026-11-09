@@ -1,0 +1,273 @@
+/* ---------- Design tokens (colors, sizes) ---------- */
+:root {
+  --color-bg: #f4f6f8;
+  --color-surface: #ffffff;
+  --color-text: #1f2933;
+  --color-muted: #616e7c;
+  --color-border: #e4e7eb;
+  --color-primary: #2563eb;
+  --color-primary-soft: #e8f0fe;
+  --radius: 12px;
+  --sidebar-width: 240px;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --color-bg: #0f1720;
+  --color-surface: #1a2332;
+  --color-text: #e6ebf1;
+  --color-muted: #9aa5b1;
+  --color-border: #2d3a4b;
+  --color-primary: #6ea0ff;
+  --color-primary-soft: #1e2e4d;
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+h1, h2, p {
+  margin: 0;
+}
+
+/* ---------- Layout: sidebar + content ---------- */
+.app {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 24px 16px;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+}
+
+.brand {
+  padding: 0 12px 24px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--color-muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.nav-link[aria-current="page"] {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.content {
+  width: 100%;
+  max-width: 1100px;
+  padding: 32px;
+}
+
+/* ---------- Theme switch (sun / moon slider) ---------- */
+.theme-switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 52px;
+  height: 28px;
+  margin-top: auto; /* pushes the switch to the bottom of the sidebar */
+  margin-left: 12px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-border);
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.theme-switch:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.switch-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  font-size: 13px;
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease;
+}
+
+.switch-thumb::before {
+  content: "☀️";
+}
+
+/* Dark mode: track turns blue, thumb slides right and shows the moon.
+   Driven by data-theme so it is correct from the very first paint. */
+:root[data-theme="dark"] .theme-switch {
+  background: var(--color-primary);
+}
+
+:root[data-theme="dark"] .switch-thumb {
+  transform: translateX(24px);
+}
+
+:root[data-theme="dark"] .switch-thumb::before {
+  content: "🌙";
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-switch,
+  .switch-thumb {
+    transition: none;
+  }
+}
+
+/* ---------- Page pieces ---------- */
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  font-size: 1.75rem;
+}
+
+.page-subtitle {
+  color: var(--color-muted);
+}
+
+.card {
+  padding: 24px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.card h2 {
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.empty-state {
+  color: var(--color-muted);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  padding: 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.stat-label {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* ---------- Mobile: sidebar becomes a bottom bar ---------- */
+@media (max-width: 768px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    flex-direction: row;
+    align-items: center;
+    height: auto;
+    padding: 8px;
+    border-right: none;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .brand {
+    display: none;
+  }
+
+  .nav {
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .nav-link {
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 6px 4px;
+    font-size: 0.75rem;
+    text-align: center;
+  }
+
+  .theme-switch {
+    margin: 0 8px;
+  }
+
+  .content {
+    padding: 20px 16px 96px; /* extra bottom space so the bar doesn't cover content */
+  }
+}

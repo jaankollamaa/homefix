@@ -4,10 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HomeFix</title>
+  <script>
+    // Runs before the page is drawn, to avoid a flash of the wrong theme.
+    (function () {
+      var theme = null;
+      try { theme = localStorage.getItem('homefix-theme'); } catch (e) {}
+      if (theme !== 'dark' && theme !== 'light') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <h1>HomeFix</h1>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">HomeFix</div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a class="nav-link" href="#dashboard" data-route="dashboard">
+          <span class="nav-icon" aria-hidden="true">🏠</span>
+          <span class="nav-label">Dashboard</span>
+        </a>
+        <a class="nav-link" href="#appliances" data-route="appliances">
+          <span class="nav-icon" aria-hidden="true">🧺</span>
+          <span class="nav-label">My Appliances</span>
+        </a>
+        <a class="nav-link" href="#maintenance" data-route="maintenance">
+          <span class="nav-icon" aria-hidden="true">🛠️</span>
+          <span class="nav-label">Maintenance</span>
+        </a>
+        <a class="nav-link" href="#repairs" data-route="repairs">
+          <span class="nav-icon" aria-hidden="true">📋</span>
+          <span class="nav-label">Repair History</span>
+        </a>
+      </nav>
+
+      <button type="button" class="theme-switch" id="theme-toggle"
+              role="switch" aria-checked="false" aria-label="Dark mode">
+        <span class="switch-thumb" aria-hidden="true"></span>
+      </button>
+    </aside>
+
+    <main class="content" id="content"></main>
+  </div>
+
   <script type="module" src="js/main.js"></script>
 </body>
 </html>
