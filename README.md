@@ -1,8 +1,8 @@
-# HomeFix – Household Maintenance Tracker
+# HomeFix – Household Maintenance and Repair Tracker
 
 ## 1. Project Name
 
-**HomeFix – Household Maintenance Tracker**
+**HomeFix – Household Maintenance and Repair Tracker**
 
 HomeFix is a web application designed to help users organize and manage household appliances, maintenance schedules and repair history.
 
@@ -10,9 +10,9 @@ HomeFix is a web application designed to help users organize and manage househol
 
 The purpose of HomeFix is to provide a centralized place where users can manage information about their household appliances and keep track of their maintenance.
 
-Many households own several appliances, such as washing machines, dishwashers, refrigerators and ovens. However, information about their maintenance, repairs and warranties is often scattered across different documents or simply forgotten.
+Many households own several appliances, such as washing machines, dishwashers, refrigerators and ovens. However, information about their maintenance, repairs and purchase details is often scattered across different documents or simply forgotten.
 
-HomeFix aims to solve this problem by allowing users to register appliances, document repairs, schedule maintenance tasks and keep track of important information.
+HomeFix aims to solve this problem by allowing users to register appliances, document repairs, schedule maintenance tasks and keep a complete history for each appliance.
 
 The main goal is to make household maintenance easier to organize and help users extend the lifespan of their appliances through better maintenance management.
 
@@ -77,6 +77,8 @@ The initial version will use HTML, CSS and JavaScript without requiring a backen
 
 LocalStorage will be used to save information directly in the browser.
 
+LocalStorage keeps data only in one browser on one device. It is not encrypted, not backed up, and the data is lost if the user clears the browser's site data. For this reason, HomeFix is not a secure cloud storage solution.
+
 ## 6. Implementation Plan
 
 The development process will be divided into the following stages:
@@ -136,6 +138,7 @@ If development continues beyond the initial version, the following features coul
 
 - User registration and authentication.
 - Cloud-based data storage and synchronization.
+- Data export and import for backups.
 - Warranty expiration reminders.
 - Uploading appliance manuals, receipts and invoices.
 - Multiple household management.
@@ -145,6 +148,6 @@ These improvements are not part of the initial project scope but could be consid
 
 ---
 
-**Project:** HomeFix – Household Maintenance Tracker  
+**Project:** HomeFix – Household Maintenance and Repair Tracker  
 **Type:** Web Application  
-**Status:** Planned
+**Status:** In development
