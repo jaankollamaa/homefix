@@ -5,8 +5,14 @@
   --color-text: #1f2933;
   --color-muted: #616e7c;
   --color-border: #e4e7eb;
+  --color-input-border: #9aa5b1;
   --color-primary: #2563eb;
   --color-primary-soft: #e8f0fe;
+  --color-success: #15803d;
+  --color-success-soft: #e7f6ec;
+  --color-danger: #b91c1c;
+  --color-danger-soft: #fdecec;
+  --color-on-accent: #ffffff; /* text color on top of primary/danger buttons */
   --radius: 12px;
   --sidebar-width: 240px;
   --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -19,8 +25,14 @@
   --color-text: #e6ebf1;
   --color-muted: #9aa5b1;
   --color-border: #2d3a4b;
+  --color-input-border: #52627a;
   --color-primary: #6ea0ff;
   --color-primary-soft: #1e2e4d;
+  --color-success: #4ade80;
+  --color-success-soft: #12301f;
+  --color-danger: #f87171;
+  --color-danger-soft: #3a1a1d;
+  --color-on-accent: #0b1220;
   color-scheme: dark;
 }
 
@@ -29,6 +41,11 @@
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+/* Makes the "hidden" attribute always win over other display rules. */
+[hidden] {
+  display: none !important;
 }
 
 body {
@@ -174,6 +191,14 @@ h1, h2, p {
   margin-bottom: 24px;
 }
 
+.page-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 .page-header h1 {
   font-size: 1.75rem;
 }
@@ -220,6 +245,228 @@ h1, h2, p {
 .stat-value {
   font-size: 2rem;
   font-weight: 700;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-on-accent);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.08);
+}
+
+.btn-secondary {
+  background: transparent;
+  border-color: var(--color-input-border);
+  color: var(--color-text);
+}
+
+.btn-secondary:hover {
+  background: var(--color-bg);
+}
+
+.btn-danger {
+  background: var(--color-danger);
+  color: var(--color-on-accent);
+}
+
+.btn-danger:hover {
+  filter: brightness(1.08);
+}
+
+.btn-outline-danger {
+  background: transparent;
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+.btn-outline-danger:hover {
+  background: var(--color-danger-soft);
+}
+
+/* ---------- Messages ---------- */
+.message {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border: 1px solid;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.message-success {
+  background: var(--color-success-soft);
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.message-error {
+  background: var(--color-danger-soft);
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+/* ---------- Forms ---------- */
+.form-card {
+  margin-bottom: 24px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--color-input-border);
+  border-radius: 8px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.field input:focus-visible,
+.field select:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+  border-color: var(--color-primary);
+}
+
+.field [aria-invalid="true"] {
+  border-color: var(--color-danger);
+}
+
+.field-error {
+  color: var(--color-danger);
+  font-size: 0.85rem;
+}
+
+.form-hint {
+  margin-top: 12px;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.form-card .message {
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+/* ---------- Appliance cards ---------- */
+.appliance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.appliance-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.appliance-name {
+  font-size: 1.1rem;
+  overflow-wrap: anywhere;
+}
+
+.badge {
+  align-self: flex-start;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  margin: 0;
+}
+
+.details dt {
+  color: var(--color-muted);
+}
+
+.details dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+/* ---------- Delete confirmation dialog ---------- */
+.confirm-dialog {
+  max-width: 420px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.confirm-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.confirm-dialog h2 {
+  margin-bottom: 12px;
+  font-size: 1.15rem;
+}
+
+.confirm-name {
+  margin-bottom: 8px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 /* ---------- Mobile: sidebar becomes a bottom bar ---------- */
