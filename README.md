@@ -121,7 +121,7 @@ The development process will be divided into the following stages:
 
 The project will be considered complete when the following requirements are met:
 
-- [ ] Users can add, edit and delete household appliances.
+- [✔] Users can add, edit and delete household appliances.
 - [ ] Users can create maintenance tasks and assign due dates.
 - [ ] Users can mark maintenance tasks as completed.
 - [ ] Users can record appliance repairs and associated costs.
